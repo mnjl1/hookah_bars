@@ -1,7 +1,7 @@
 from django.shortcuts import render
 from rest_framework import generics
-from .serializers import HookahListSerializer, HookahDetailSerializer
-from .models import Hookah
+from .serializers import HookahListSerializer, HookahDetailSerializer, HookahImageDetailSerializer
+from .models import Hookah, HookahImage
 
 class HookahListAPIView(generics.ListAPIView):
     queryset = Hookah.objects.all()
@@ -9,5 +9,14 @@ class HookahListAPIView(generics.ListAPIView):
 
 class HookahRetrieveAPIView(generics.RetrieveAPIView):
     lookup_field = 'id'
+    queryset = Hookah.objects.all()
+    serializer_class = HookahDetailSerializer
+
+class HookahImageRetrieveAPIView(generics.ListAPIView):
+    queryset = HookahImage.objects.all()
+    serializer_class = HookahImageDetailSerializer
+
+
+class HookahCreateAPIView(generics.CreateAPIView):
     queryset = Hookah.objects.all()
     serializer_class = HookahDetailSerializer

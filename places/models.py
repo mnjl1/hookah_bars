@@ -5,9 +5,15 @@ from django.urls import reverse
 class HookahType(models.Model):
     hookah_type = models.CharField(max_length = 50, unique = True)
 
+    def __str__(self):
+        return f'{self.hookah_type}'
+
 
 class HookahTobacco(models.Model):
     hookah_tobacco = models.CharField(max_length = 50, unique = True)
+
+    def __str__(self):
+        return f'{self.hookah_tobacco}'
 
 
 class Hookah(models.Model):
@@ -30,13 +36,14 @@ class Hookah(models.Model):
     def __str__(self):
         return f'{self.hookah_name}, {self.city}' 
 
-    # def get_absolute_url(self):
-    #     return reverse()
-
 
 class HookahImage(models.Model):
     hookah_image = models.ImageField(
         upload_to = 'hookahImages'
     )
-    hookah = models.ForeignKey(Hookah, on_delete = models.CASCADE)
+    hookah = models.ForeignKey(
+        Hookah,
+        related_name = 'hookah_images',
+        on_delete = models.CASCADE
+    )
 
