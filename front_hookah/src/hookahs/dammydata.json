@@ -1,0 +1,17 @@
+[
+    {
+        "id": "1",
+        "hookah_name": "Hookah Best",
+        "city": "Kyiv"
+    },
+    {
+        "id": "2",
+        "hookah_name": "Hookah Dark Place",
+        "city": "Kyiv"
+    },
+    {
+        "id": "3",
+        "hookah_name": "Hookah Hell",
+        "city": "Kyiv"
+    }
+]

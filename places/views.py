@@ -20,3 +20,13 @@ class HookahImageRetrieveAPIView(generics.ListAPIView):
 class HookahCreateAPIView(generics.CreateAPIView):
     queryset = Hookah.objects.all()
     serializer_class = HookahDetailSerializer
+
+class HookahRetrieveUpdateAPIView(generics.RetrieveUpdateAPIView):
+    lookup_field = 'id'
+    queryset = Hookah.objects.all()
+    serializer_class = HookahDetailSerializer
+
+
+class HookahDestroyAPIView(generics.DestroyAPIView):
+    lookup_field = 'id'
+    queryset = Hookah.objects.all()

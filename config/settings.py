@@ -41,13 +41,17 @@ INSTALLED_APPS = [
     # Third party
     'rest_framework',
     'cities_light',
+    'corsheaders',
 
     # Local apps
     'accounts',
     'places',
+
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -56,6 +60,15 @@ MIDDLEWARE = [
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
+
+# TODO fix for production
+# CORS_ALLOWED_ORIGINS = [
+#     "http://localhost:8080",
+#     "http://127.0.0.1:8000",
+#     # "http://localhost:3000/"
+# ]
+
+CORS_ALLOW_ALL_ORIGINS = True
 
 ROOT_URLCONF = 'config.urls'
 
@@ -130,3 +143,4 @@ STATIC_URL = '/static/'
 AUTH_USER_MODEL = 'accounts.CustomUser'
 
 CITIES_LIGHT_INCLUDE_COUNTRIES = ['UA']
+CITIES_LIGHT_TRANSLATION_LANGUAGES = ['ua', 'abbr']
