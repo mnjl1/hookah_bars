@@ -1,7 +1,13 @@
 from rest_framework import serializers
-from .models import Hookah, HookahImage
+from .models import Hookah, HookahImage, HookahTobacco
 from rest_framework.reverse import reverse
 
+class HookahTobaccoDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HookahTobacco
+        fields = (
+            'hookah_tobacco',
+        )
 
 class HookahListSerializer(serializers.ModelSerializer):
     absolute_url = serializers.SerializerMethodField()
@@ -30,7 +36,7 @@ class HookahImageDetailSerializer(serializers.ModelSerializer):
 
 class HookahDetailSerializer(serializers.ModelSerializer):
     hookah_images = HookahImageDetailSerializer(many = True)
-
+    hookah_tobacco = HookahTobaccoDetailSerializer(many = True, read_only = True)
     class Meta:
         model = Hookah
         fields = (
@@ -49,7 +55,6 @@ class HookahDetailSerializer(serializers.ModelSerializer):
         )
 
     def create(self, validated_data):
-        # images_data = validated_data.pop(**validated_data)
         images_data = self.context['request'].FILES.getlist('hookah_images')
         hookah = Hookah.objects.create(**validated_data)
         for image_data in images_data:

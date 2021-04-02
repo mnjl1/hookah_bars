@@ -11,7 +11,6 @@ function App() {
         <p>
           Web App for Hookah Lovers
         </p>
-        
           <h1>Hookah Places</h1>
           <HookahList/>
       </header>

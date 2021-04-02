@@ -18,6 +18,7 @@ class HookahList extends Component {
         axios.get("http://127.0.0.1:8000".concat(item.absolute_url))
                 .then((response) => {
                     this.setState({hookah: response.data})
+                    console.log()
                 })
                 .catch(function (error) {
                     console.log(error);
