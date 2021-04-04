@@ -50,7 +50,8 @@ class HookahList extends Component {
                         (item) => {
                             return ( <h3 key={item.id} onClick = {
                                 () => this.showHookahDetail(item)}>
-                                {item.hookah_name}, {item.city}</h3>
+                                {console.log(item)}
+                                {item.hookah_name}, {item.city.name}, {item.street}</h3>
                             );
                         }
                     )

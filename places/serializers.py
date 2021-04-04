@@ -1,6 +1,14 @@
 from rest_framework import serializers
-from .models import Hookah, HookahImage, HookahTobacco
+from .models import Hookah, HookahImage, HookahTobacco, HookahType
+from cities_light.models import City
 from rest_framework.reverse import reverse
+
+class CitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = City
+        fields = [
+            'name',
+        ]
 
 class HookahTobaccoDetailSerializer(serializers.ModelSerializer):
     class Meta:
@@ -9,15 +17,23 @@ class HookahTobaccoDetailSerializer(serializers.ModelSerializer):
             'hookah_tobacco',
         )
 
+class HookahTypeDetailSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = HookahType
+        fields = (
+            'hookah_type',
+        )
+
 class HookahListSerializer(serializers.ModelSerializer):
     absolute_url = serializers.SerializerMethodField()
-
+    city = CitySerializer(many = False)
     class Meta:
         model = Hookah
         fields = (
             'id',
             'hookah_name',
             'city',
+            'street',
             'absolute_url',
         )
     
@@ -37,6 +53,8 @@ class HookahImageDetailSerializer(serializers.ModelSerializer):
 class HookahDetailSerializer(serializers.ModelSerializer):
     hookah_images = HookahImageDetailSerializer(many = True)
     hookah_tobacco = HookahTobaccoDetailSerializer(many = True, read_only = True)
+    hookah_type = HookahTypeDetailSerializer(many = True, read_only = True)
+    city = CitySerializer(many = False)
     class Meta:
         model = Hookah
         fields = (
